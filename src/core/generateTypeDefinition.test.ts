@@ -68,4 +68,18 @@ describe("generateTypeDefinition", () => {
       body: "unknown",
     });
   });
+
+  it("should throw an error for invalid $ref in schema", () => {
+    expect(() => generateTypeDefinition({ $ref: "#/components/schemas/" })).toThrowError("Invalid $ref in schema");
+  });
+
+  it("should generate a type definition for valid $ref in schema", () => {
+    const output = generateTypeDefinition({ $ref: "#/components/schemas/AwesomeType" });
+    expect(output).toStrictEqual({
+      dependencies: [
+        "AwesomeType",
+      ],
+      body: "AwesomeType",
+    });
+  });
 });
