@@ -1,11 +1,8 @@
+import type { Definition } from "~/types/definition";
+import { handleObjectType } from "./handleObjectType";
 import type { SchemaObject } from "@omer-x/openapi-types/schema";
 
-type Definition = {
-  dependencies: string[],
-  body: string,
-};
-
-export function generateTypeDefinition(schema: SchemaObject): Definition {
+export function generateTypeDefinition(schema: SchemaObject, indentation: number = 0): Definition {
   switch (schema.type) {
     case "null":
       return {
@@ -28,6 +25,9 @@ export function generateTypeDefinition(schema: SchemaObject): Definition {
         dependencies: [],
         body: "string",
       };
+    case "object": {
+      return handleObjectType(schema, indentation);
+    }
     default:
       return {
         dependencies: [],
