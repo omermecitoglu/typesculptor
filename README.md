@@ -14,10 +14,10 @@ Typesculptor generates interpretable json objects to generate TypeScript types f
 
 ## Installation
 
-To install this package, along with its peer dependency, run:
+To install this package
 
 ```sh
-npm install @omer-x/typesculptor @omer-x/next-openapi-json-generator
+npm install @omer-x/typesculptor
 ```
 
 ## License
