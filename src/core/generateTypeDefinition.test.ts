@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { generateTypeDefinition } from "./generateTypeDefinition";
+import type { SchemaObject } from "@omer-x/openapi-types/schema";
 
 describe("generateTypeDefinition", () => {
   it("should generate a null type definition for null type", () => {
@@ -39,6 +40,32 @@ describe("generateTypeDefinition", () => {
     expect(output).toStrictEqual({
       dependencies: [],
       body: "string",
+    });
+  });
+
+  it("should generate an object type definition for object type", () => {
+    const schema: SchemaObject = { type: "object", properties: { foo: { type: "string" }, bar: { type: "number" } } };
+    const output = generateTypeDefinition(schema);
+    expect(output).toStrictEqual({
+      dependencies: [],
+      body: `{
+  /**
+   * missing-description
+   */
+  foo: string,
+  /**
+   * missing-description
+   */
+  bar: number,
+}`,
+    });
+  });
+
+  it("should return unknown type definition for unknown type", () => {
+    const output = generateTypeDefinition({ type: "something-else" as "string" });
+    expect(output).toStrictEqual({
+      dependencies: [],
+      body: "unknown",
     });
   });
 });
