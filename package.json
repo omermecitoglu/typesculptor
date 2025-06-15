@@ -1,4 +1,30 @@
 {
+  "name": "@omer-x/typesculptor",
+  "version": "1.0.0",
+  "description": "generates interpretable json objects to generate TypeScript types from JSON Schemas",
+  "keywords": [
+    "json-schema",
+    "interpretable",
+    "type-generator"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/omermecitoglu/typesculptor.git"
+  },
+  "bugs": {
+    "url": "https://github.com/omermecitoglu/typesculptor/issues"
+  },
+  "homepage": "https://github.com/omermecitoglu/typesculptor#readme",
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": {
+    "name": "Omer Mecitoglu",
+    "email": "omer.mecitoglu@gmail.com",
+    "url": "https://omermecitoglu.github.io"
+  },
+  "license": "MIT",
   "type": "module",
   "files": [
     "dist/"
