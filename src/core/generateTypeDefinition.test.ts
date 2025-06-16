@@ -94,4 +94,32 @@ describe("generateTypeDefinition", () => {
       body: "AwesomeType",
     });
   });
+
+  it("should generate a union type definition for anyOf in schema", () => {
+    const schema = {
+      anyOf: [
+        { type: "string" as const },
+        { type: "number" as const },
+      ],
+    } as SchemaObject;
+    const output = generateTypeDefinition(schema);
+    expect(output).toStrictEqual({
+      dependencies: [],
+      body: "(string | number)",
+    });
+  });
+
+  it("should generate a union type definition for oneOf in schema", () => {
+    const schema = {
+      oneOf: [
+        { type: "boolean" as const },
+        { type: "null" as const },
+      ],
+    } as SchemaObject;
+    const output = generateTypeDefinition(schema);
+    expect(output).toStrictEqual({
+      dependencies: [],
+      body: "(boolean | null)",
+    });
+  });
 });

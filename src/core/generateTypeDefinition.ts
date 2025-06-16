@@ -2,6 +2,7 @@ import type { Definition } from "~/types/definition";
 import { handleArrayType } from "./handleArrayType";
 import { handleObjectType } from "./handleObjectType";
 import { handleStringType } from "./handleStringType";
+import { handleUnionType } from "./handleUnionType";
 import type { ReferenceObject } from "@omer-x/openapi-types/reference";
 import type { SchemaObject } from "@omer-x/openapi-types/schema";
 
@@ -14,6 +15,10 @@ export function generateTypeDefinition(schema: SchemaObject | ReferenceObject, i
       body: componentName,
     };
   }
+
+  if (schema.anyOf) return handleUnionType(schema.anyOf);
+  if (schema.oneOf) return handleUnionType(schema.oneOf);
+
   switch (schema.type) {
     case "null":
       return {
