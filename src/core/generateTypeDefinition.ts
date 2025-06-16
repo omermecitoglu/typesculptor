@@ -1,5 +1,6 @@
 import type { Definition } from "~/types/definition";
 import { handleObjectType } from "./handleObjectType";
+import { handleStringType } from "./handleStringType";
 import type { ReferenceObject } from "@omer-x/openapi-types/reference";
 import type { SchemaObject } from "@omer-x/openapi-types/schema";
 
@@ -30,10 +31,7 @@ export function generateTypeDefinition(schema: SchemaObject | ReferenceObject, i
         body: "number",
       };
     case "string":
-      return {
-        dependencies: [],
-        body: "string",
-      };
+      return handleStringType(schema);
     case "object": {
       return handleObjectType(schema, indentation);
     }
