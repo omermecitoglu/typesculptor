@@ -21,10 +21,24 @@ describe("handleObjectType", () => {
       properties: {
         foo: { type: "string", description: "Foo property" },
       },
+      required: ["foo"],
     };
     const result = handleObjectType(schema, 0);
     expect(result.body).toContain("foo: string");
     expect(result.body).toContain("Foo property");
+    expect(result.body).not.toContain("foo?:");
+  });
+
+  it("should mark property as optional if not required", () => {
+    const schema: SchemaObject = {
+      type: "object",
+      properties: {
+        bar: { type: "boolean", description: "Bar property" },
+      },
+    };
+    const result = handleObjectType(schema, 0);
+    expect(result.body).toContain("bar?: boolean");
+    expect(result.body).toContain("Bar property");
   });
 
   it("should use 'missing-description' if property description is missing", () => {
@@ -33,8 +47,10 @@ describe("handleObjectType", () => {
       properties: {
         baz: { type: "number" },
       },
+      required: ["baz"],
     };
     const result = handleObjectType(schema, 0);
+    expect(result.body).toContain("baz: number");
     expect(result.body).toContain("missing-description");
   });
 });

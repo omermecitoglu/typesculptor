@@ -52,11 +52,11 @@ describe("generateTypeDefinition", () => {
   /**
    * missing-description
    */
-  foo: string,
+  foo?: string,
   /**
    * missing-description
    */
-  bar: number,
+  bar?: number,
 }`,
     });
   });

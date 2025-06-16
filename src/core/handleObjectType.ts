@@ -25,11 +25,13 @@ export function handleObjectType(schema: SchemaObject, indentation: number): Def
     }
   }
 
+  const isRequired = (propertyName: string) => (schema.required ?? []).includes(propertyName);
+
   const properties = Object.keys(schema.properties ?? {}).map(propertyName => [
     "/**",
     ` * ${propertyDescriptions[propertyName] ?? "missing-description"}`,
     " */",
-    `${propertyName}: ${propertyBodies[propertyName]},`,
+    `${propertyName}${isRequired(propertyName) ? "" : "?"}: ${propertyBodies[propertyName]},`,
   ].map(line => generateIndentation(indentation + 1) + line).join("\n"));
 
   return {
