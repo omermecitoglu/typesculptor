@@ -61,6 +61,18 @@ describe("generateTypeDefinition", () => {
     });
   });
 
+  it("should generate an array type definition for array type", () => {
+    const schema: SchemaObject = {
+      type: "array",
+      items: { type: "string" },
+    };
+    const output = generateTypeDefinition(schema);
+    expect(output).toStrictEqual({
+      dependencies: [],
+      body: "string[]",
+    });
+  });
+
   it("should return unknown type definition for unknown type", () => {
     const output = generateTypeDefinition({ type: "something-else" as "string" });
     expect(output).toStrictEqual({
