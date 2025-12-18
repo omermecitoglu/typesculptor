@@ -20,11 +20,11 @@ export function handleArrayType(schema: SchemaObject): Definition {
     if (schema.items === false) {
       // No additional items
     } else if (schema.items === true) {
-      additionalType = "...unknown[]";
+      additionalType = "...Array<unknown>";
     } else if (schema.items && typeof schema.items === "object") {
       const additionalDef = generateTypeDefinition(schema.items);
       dependencies.push(...additionalDef.dependencies);
-      additionalType = `...${additionalDef.body}[]`;
+      additionalType = `...Array<${additionalDef.body}>`;
     } else {
       // items is undefined, no additional items
     }
@@ -47,7 +47,7 @@ export function handleArrayType(schema: SchemaObject): Definition {
 
     return {
       dependencies,
-      body: `${itemType}[]`,
+      body: `Array<${itemType}>`,
     };
   }
 }
