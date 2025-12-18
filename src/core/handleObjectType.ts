@@ -1,7 +1,7 @@
 import type { Definition } from "~/types/definition";
 import { generateIndentation } from "~/utils/generateIndentation";
 import { generateTypeDefinition } from "./generateTypeDefinition";
-import type { SchemaObject } from "@omer-x/openapi-types/schema";
+import type { SchemaObject } from "@omer-x/json-schema-types";
 
 /**
  * Handles the generation of a TypeScript object type definition from a given JSON Schema.

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { handleUnionType } from "./handleUnionType";
-import type { SchemaObject } from "@omer-x/openapi-types/schema";
+import type { SchemaObject } from "@omer-x/json-schema-types";
 
 describe("handleUnionType", () => {
   it("should be a function", () => {

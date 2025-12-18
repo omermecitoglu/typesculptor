@@ -3,8 +3,8 @@ import { handleArrayType } from "./handleArrayType";
 import { handleObjectType } from "./handleObjectType";
 import { handleStringType } from "./handleStringType";
 import { handleUnionType } from "./handleUnionType";
+import type { SchemaObject } from "@omer-x/json-schema-types";
 import type { ReferenceObject } from "@omer-x/openapi-types/reference";
-import type { SchemaObject } from "@omer-x/openapi-types/schema";
 
 export function generateTypeDefinition(schema: SchemaObject | ReferenceObject, indentation: number = 0): Definition {
   if ("$ref" in schema) {

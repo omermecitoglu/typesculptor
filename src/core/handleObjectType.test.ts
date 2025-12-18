@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { handleObjectType } from "./handleObjectType";
-import type { SchemaObject } from "@omer-x/openapi-types/schema";
+import type { SchemaObject } from "@omer-x/json-schema-types";
 
 describe("handleObjectType", () => {
   it("should throw if schema type is not 'object'", () => {

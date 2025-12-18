@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { generateTypeDefinition } from "./generateTypeDefinition";
-import type { SchemaObject } from "@omer-x/openapi-types/schema";
+import type { SchemaObject } from "@omer-x/json-schema-types";
 
 describe("generateTypeDefinition", () => {
   it("should generate a null type definition for null type", () => {

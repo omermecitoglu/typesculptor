@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { handleArrayType } from "./handleArrayType";
-import type { SchemaObject } from "@omer-x/openapi-types/schema";
+import type { SchemaObject } from "@omer-x/json-schema-types";
 
 describe("handleArrayType", () => {
   it("should be a function", () => {

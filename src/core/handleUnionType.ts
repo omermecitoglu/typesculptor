@@ -1,6 +1,6 @@
 import type { Definition } from "~/types/definition";
 import { generateTypeDefinition } from "./generateTypeDefinition";
-import type { SchemaObject } from "@omer-x/openapi-types/schema";
+import type { SchemaObject } from "@omer-x/json-schema-types";
 
 export function handleUnionType(schemas: SchemaObject[]): Definition {
   const dependencies: string[] = [];

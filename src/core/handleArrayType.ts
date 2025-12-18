@@ -1,6 +1,6 @@
 import type { Definition } from "~/types/definition";
 import { generateTypeDefinition } from "./generateTypeDefinition";
-import type { SchemaObject } from "@omer-x/openapi-types/schema";
+import type { SchemaObject } from "@omer-x/json-schema-types";
 
 export function handleArrayType(schema: SchemaObject): Definition {
   if (schema.type !== "array") throw new Error("Schema type must be 'array'");

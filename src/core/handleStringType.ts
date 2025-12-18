@@ -1,5 +1,5 @@
 import type { Definition } from "~/types/definition";
-import type { SchemaObject } from "@omer-x/openapi-types/schema";
+import type { SchemaObject } from "@omer-x/json-schema-types";
 
 export function handleStringType(schema: SchemaObject): Definition {
   if (schema.type !== "string") throw new Error("Schema type must be 'string'");
