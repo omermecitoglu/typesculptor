@@ -323,4 +323,23 @@ describe("handleArrayType", () => {
     const result = handleArrayType(schema);
     expect(result.body).toBe("[string, number, ...boolean[]]");
   });
+
+  it("handles an array schema with an enum items schema", () => {
+    const schema: SchemaObject = {
+      type: "array",
+      items: {
+        type: "string",
+        enum: [
+          "id",
+          "name",
+          "isMale",
+          "birthDate",
+          "createdAt",
+          "updatedAt",
+        ],
+      },
+    };
+    const result = handleArrayType(schema);
+    expect(result.body).toBe('Array<"id" | "name" | "isMale" | "birthDate" | "createdAt" | "updatedAt">');
+  });
 });
