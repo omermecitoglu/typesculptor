@@ -6,20 +6,48 @@ export function handleArrayType(schema: SchemaObject): Definition {
   if (schema.type !== "array") throw new Error("Schema type must be 'array'");
 
   const dependencies: string[] = [];
-  const itemBodies: string[] = [];
-  for (const item of [schema.items].flat()) {
-    const itemDefinition = generateTypeDefinition(item);
-    dependencies.push(...itemDefinition.dependencies);
-    itemBodies.push(itemDefinition.body);
-  }
 
-  if (schema.minItems && schema.maxItems && schema.minItems === schema.maxItems) {
-    return { dependencies, body: `[${itemBodies.join(", ")}]` };
-  }
+  if (schema.prefixItems) {
+    // Tuple type
+    const prefixTypes: string[] = [];
+    for (const itemSchema of schema.prefixItems) {
+      const itemDef = generateTypeDefinition(itemSchema);
+      dependencies.push(...itemDef.dependencies);
+      prefixTypes.push(itemDef.body);
+    }
 
-  if (itemBodies.length > 1) {
-    return { dependencies, body: `(${itemBodies.join(", ")})[]` };
-  }
+    let additionalType = "";
+    if (schema.items === false) {
+      // No additional items
+    } else if (schema.items === true) {
+      additionalType = "...unknown[]";
+    } else if (schema.items && typeof schema.items === "object") {
+      const additionalDef = generateTypeDefinition(schema.items);
+      dependencies.push(...additionalDef.dependencies);
+      additionalType = `...${additionalDef.body}[]`;
+    } else {
+      // items is undefined, no additional items
+    }
 
-  return { dependencies, body: `${itemBodies.join(", ")}[]` };
+    const tupleBody = `[${prefixTypes.join(", ")}${additionalType ? ", " + additionalType : ""}]`;
+    return {
+      dependencies,
+      body: tupleBody,
+    };
+  } else {
+    // Array type
+    let itemType = "unknown";
+    if (schema.items === false) {
+      itemType = "never";
+    } else if (schema.items && typeof schema.items === "object") {
+      const itemDef = generateTypeDefinition(schema.items);
+      dependencies.push(...itemDef.dependencies);
+      itemType = itemDef.body;
+    }
+
+    return {
+      dependencies,
+      body: `${itemType}[]`,
+    };
+  }
 }
