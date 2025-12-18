@@ -69,7 +69,7 @@ describe("generateTypeDefinition", () => {
     const output = generateTypeDefinition(schema);
     expect(output).toStrictEqual({
       dependencies: [],
-      body: "string[]",
+      body: "Array<string>",
     });
   });
 

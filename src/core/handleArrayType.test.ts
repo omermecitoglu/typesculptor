@@ -16,7 +16,7 @@ describe("handleArrayType", () => {
       type: "array",
     };
     const result = handleArrayType(schema);
-    expect(result.body).toBe("unknown[]");
+    expect(result.body).toBe("Array<unknown>");
   });
 
   it("handles an array schema with string items", () => {
@@ -25,7 +25,7 @@ describe("handleArrayType", () => {
       items: { type: "string" },
     };
     const result = handleArrayType(schema);
-    expect(result.body).toBe("string[]");
+    expect(result.body).toBe("Array<string>");
   });
 
   it("handles an array schema with items set to false", () => {
@@ -34,7 +34,7 @@ describe("handleArrayType", () => {
       items: false,
     };
     const result = handleArrayType(schema);
-    expect(result.body).toBe("never[]");
+    expect(result.body).toBe("Array<never>");
   });
 
   it("handles an array schema with minimum items constraint", () => {
@@ -43,7 +43,7 @@ describe("handleArrayType", () => {
       minItems: 1,
     };
     const result = handleArrayType(schema);
-    expect(result.body).toBe("unknown[]");
+    expect(result.body).toBe("Array<unknown>");
   });
 
   it("handles an array schema with maximum items constraint", () => {
@@ -52,7 +52,7 @@ describe("handleArrayType", () => {
       maxItems: 5,
     };
     const result = handleArrayType(schema);
-    expect(result.body).toBe("unknown[]");
+    expect(result.body).toBe("Array<unknown>");
   });
 
   it("handles an array schema with minimum and maximum items constraints", () => {
@@ -62,7 +62,7 @@ describe("handleArrayType", () => {
       maxItems: 5,
     };
     const result = handleArrayType(schema);
-    expect(result.body).toBe("unknown[]");
+    expect(result.body).toBe("Array<unknown>");
   });
 
   it("handles an array schema with string items and minimum items constraint", () => {
@@ -72,7 +72,7 @@ describe("handleArrayType", () => {
       minItems: 1,
     };
     const result = handleArrayType(schema);
-    expect(result.body).toBe("string[]");
+    expect(result.body).toBe("Array<string>");
   });
 
   it("handles an array schema with string items and maximum items constraint", () => {
@@ -82,7 +82,7 @@ describe("handleArrayType", () => {
       maxItems: 5,
     };
     const result = handleArrayType(schema);
-    expect(result.body).toBe("string[]");
+    expect(result.body).toBe("Array<string>");
   });
 
   it("handles an array schema with string items and minimum and maximum items constraints", () => {
@@ -93,7 +93,7 @@ describe("handleArrayType", () => {
       maxItems: 5,
     };
     const result = handleArrayType(schema);
-    expect(result.body).toBe("string[]");
+    expect(result.body).toBe("Array<string>");
   });
 
   it("handles an array schema with items set to false and maximum items of 0", () => {
@@ -103,7 +103,7 @@ describe("handleArrayType", () => {
       maxItems: 0,
     };
     const result = handleArrayType(schema);
-    expect(result.body).toBe("never[]");
+    expect(result.body).toBe("Array<never>");
   });
 
   it("handles an array schema with empty prefixItems", () => {
@@ -131,7 +131,7 @@ describe("handleArrayType", () => {
       items: true,
     };
     const result = handleArrayType(schema);
-    expect(result.body).toBe("[string, ...unknown[]]");
+    expect(result.body).toBe("[string, ...Array<unknown>]");
   });
 
   it("handles an array schema with prefixItems and items set to false", () => {
@@ -151,7 +151,7 @@ describe("handleArrayType", () => {
       items: { type: "number" },
     };
     const result = handleArrayType(schema);
-    expect(result.body).toBe("[string, ...number[]]");
+    expect(result.body).toBe("[string, ...Array<number>]");
   });
 
   it("handles an array schema with prefixItems and minimum items constraint", () => {
@@ -193,7 +193,7 @@ describe("handleArrayType", () => {
       minItems: 1,
     };
     const result = handleArrayType(schema);
-    expect(result.body).toBe("[string, ...number[]]");
+    expect(result.body).toBe("[string, ...Array<number>]");
   });
 
   it("handles an array schema with prefixItems, additional items schema, and maximum items constraint", () => {
@@ -204,7 +204,7 @@ describe("handleArrayType", () => {
       maxItems: 5,
     };
     const result = handleArrayType(schema);
-    expect(result.body).toBe("[string, ...number[]]");
+    expect(result.body).toBe("[string, ...Array<number>]");
   });
 
   it("handles an array schema with prefixItems, additional items schema, and minimum and maximum items constraints", () => {
@@ -216,7 +216,7 @@ describe("handleArrayType", () => {
       maxItems: 5,
     };
     const result = handleArrayType(schema);
-    expect(result.body).toBe("[string, ...number[]]");
+    expect(result.body).toBe("[string, ...Array<number>]");
   });
 
   it("handles an array schema with multiple prefixItems", () => {
@@ -235,7 +235,7 @@ describe("handleArrayType", () => {
       items: true,
     };
     const result = handleArrayType(schema);
-    expect(result.body).toBe("[string, number, ...unknown[]]");
+    expect(result.body).toBe("[string, number, ...Array<unknown>]");
   });
 
   it("handles an array schema with multiple prefixItems and items set to false", () => {
@@ -255,7 +255,7 @@ describe("handleArrayType", () => {
       items: { type: "boolean" },
     };
     const result = handleArrayType(schema);
-    expect(result.body).toBe("[string, number, ...boolean[]]");
+    expect(result.body).toBe("[string, number, ...Array<boolean>]");
   });
 
   it("handles an array schema with multiple prefixItems and minimum items constraint", () => {
@@ -297,7 +297,7 @@ describe("handleArrayType", () => {
       minItems: 2,
     };
     const result = handleArrayType(schema);
-    expect(result.body).toBe("[string, number, ...boolean[]]");
+    expect(result.body).toBe("[string, number, ...Array<boolean>]");
   });
 
   it("handles an array schema with multiple prefixItems, additional items schema, and maximum items constraint", () => {
@@ -308,7 +308,7 @@ describe("handleArrayType", () => {
       maxItems: 5,
     };
     const result = handleArrayType(schema);
-    expect(result.body).toBe("[string, number, ...boolean[]]");
+    expect(result.body).toBe("[string, number, ...Array<boolean>]");
   });
 
   // eslint-disable-next-line @stylistic/max-len
@@ -321,7 +321,7 @@ describe("handleArrayType", () => {
       maxItems: 5,
     };
     const result = handleArrayType(schema);
-    expect(result.body).toBe("[string, number, ...boolean[]]");
+    expect(result.body).toBe("[string, number, ...Array<boolean>]");
   });
 
   it("handles an array schema with an enum items schema", () => {
