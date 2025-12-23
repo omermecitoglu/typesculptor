@@ -53,4 +53,64 @@ describe("handleObjectType", () => {
     expect(result.body).toContain("baz: number");
     expect(result.body).toContain("missing-description");
   });
+
+  it("should handle propertyNames with additionalProperties", () => {
+    const schema: SchemaObject = {
+      type: "object",
+      propertyNames: {
+        type: "string",
+      },
+      additionalProperties: {
+        anyOf: [
+          {
+            type: "string",
+          },
+          {
+            type: "number",
+          },
+          {
+            type: "boolean",
+          },
+        ],
+      },
+    };
+    const result = handleObjectType(schema, 0);
+    expect(result.body).toBe("Record<string, (string | number | boolean)>");
+  });
+
+  it("should handle propertyNames without additionalProperties", () => {
+    const schema: SchemaObject = {
+      type: "object",
+      propertyNames: {
+        type: "string",
+      },
+      additionalProperties: {},
+    };
+    const result = handleObjectType(schema, 0);
+    expect(result.body).toBe("Record<string, unknown>");
+  });
+
+  it("should handle propertyNames with additionalProperties as false", () => {
+    const schema: SchemaObject = {
+      type: "object",
+      propertyNames: {
+        type: "string",
+      },
+      additionalProperties: false,
+    };
+    const result = handleObjectType(schema, 0);
+    expect(result.body).toBe("{}");
+  });
+
+  it("should handle propertyNames with additionalProperties as true", () => {
+    const schema: SchemaObject = {
+      type: "object",
+      propertyNames: {
+        type: "string",
+      },
+      additionalProperties: true,
+    };
+    const result = handleObjectType(schema, 0);
+    expect(result.body).toBe("Record<string, unknown>");
+  });
 });
