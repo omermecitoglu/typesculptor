@@ -33,4 +33,13 @@ describe("handleStringType", () => {
       body: "",
     });
   });
+
+  it("should handle constant string", () => {
+    const schema: SchemaObject = { type: "string", const: "UNKNOWN_ERROR" };
+    const result = handleStringType(schema);
+    expect(result).toEqual({
+      dependencies: [],
+      body: '"UNKNOWN_ERROR"',
+    });
+  });
 });
