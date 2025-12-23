@@ -3,6 +3,12 @@ import type { SchemaObject } from "@omer-x/json-schema-types";
 
 export function handleStringType(schema: SchemaObject): Definition {
   if (schema.type !== "string") throw new Error("Schema type must be 'string'");
+  if (schema.const) {
+    return {
+      dependencies: [],
+      body: `"${schema.const}"`,
+    };
+  }
   if (schema.enum) {
     return {
       dependencies: [],
