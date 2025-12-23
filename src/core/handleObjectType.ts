@@ -13,6 +13,20 @@ import type { SchemaObject } from "@omer-x/json-schema-types";
 export function handleObjectType(schema: SchemaObject, indentation: number): Definition {
   if (schema.type !== "object") throw new Error("Schema type must be 'object'");
 
+  if (schema.propertyNames) {
+    if (schema.additionalProperties === false) {
+      return { dependencies: [], body: "{}" };
+    }
+    if (schema.additionalProperties === true || schema.additionalProperties === undefined) {
+      return { dependencies: [], body: "Record<string, unknown>" };
+    }
+    const { dependencies, body } = generateTypeDefinition(schema.additionalProperties);
+    return {
+      dependencies,
+      body: `Record<string, ${body}>`,
+    };
+  }
+
   const dependencies: string[] = [];
   const propertyBodies = {} as Record<string, string>;
   const propertyDescriptions = {} as Record<string, string | undefined>;
