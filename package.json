@@ -48,12 +48,12 @@
     "@omer-x/openapi-types": "^1"
   },
   "devDependencies": {
-    "@omer-x/eslint-config": "^2.2.6",
-    "@types/node": "^25.0.3",
-    "@vitest/coverage-v8": "^4.0.16",
+    "@omer-x/eslint-config": "^2.3.2",
+    "@types/node": "^25.2.3",
+    "@vitest/coverage-v8": "^4.0.18",
     "eslint": "^9.39.2",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3",
-    "vitest": "^4.0.16"
+    "vitest": "^4.0.18"
   }
 }
