@@ -1,5 +1,6 @@
 import type { Definition } from "~/types/definition";
 import { handleArrayType } from "./handleArrayType";
+import { handleNumberType } from "./handleNumberType";
 import { handleObjectType } from "./handleObjectType";
 import { handleStringType } from "./handleStringType";
 import { handleUnionType } from "./handleUnionType";
@@ -32,10 +33,7 @@ export function generateTypeDefinition(schema: SchemaObject | ReferenceObject, i
       };
     case "integer":
     case "number":
-      return {
-        dependencies: [],
-        body: "number",
-      };
+      return handleNumberType(schema);
     case "string":
       return handleStringType(schema);
     case "object":
